@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*  */
+.choice{
+    display: flex;
+    justify-content: space-evenly;
+}
+.choice button{
+    width: 100%;
+    margin: 1%;
+    padding: 1% 0%;
+}
+#active{
+    background-color: #15929D;
+    font-weight: bold;
+}
+.overlay{
+    background-color: rgba(0, 0, 0, 0.3); /* Low opacity */
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    z-index: 10;
+}
+#settings{
+    visibility: hidden;
+}
+.countdown{
+    font-family: 'Seven Segment', sans-serif;
+}
