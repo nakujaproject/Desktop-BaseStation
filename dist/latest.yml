@@ -1,8 +1,8 @@
 version: 1.0.0
 files:
   - url: basestation-1.0.0-setup.exe
-    sha512: bqU/J1EjLC1WbaTEpIIjazVlY7T9tGl7CaNrv9tDCFtBfK3OeDg90poDaRrnD0LzmnnsOXjUMdJAhuc0Gvqi1w==
-    size: 89238855
+    sha512: mFAtBjB/ZDdOAQItE5BMBIYLKq8g2mNyReFt2vXq+dGg6EvTOteDsH24WRbltsDu5GAU1ptVkblVbwiSHUIWCA==
+    size: 89238050
 path: basestation-1.0.0-setup.exe
-sha512: bqU/J1EjLC1WbaTEpIIjazVlY7T9tGl7CaNrv9tDCFtBfK3OeDg90poDaRrnD0LzmnnsOXjUMdJAhuc0Gvqi1w==
-releaseDate: '2024-02-26T10:42:50.836Z'
+sha512: mFAtBjB/ZDdOAQItE5BMBIYLKq8g2mNyReFt2vXq+dGg6EvTOteDsH24WRbltsDu5GAU1ptVkblVbwiSHUIWCA==
+releaseDate: '2024-03-04T11:10:13.473Z'

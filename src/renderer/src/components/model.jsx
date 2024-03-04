@@ -26,11 +26,6 @@ function Rocket(props) {
 export default function Model(props) {
   return (
     <div className='contents'>
-      <div className='inline'>
-        {
-          // [...Array(10)].map((e, i) => <div key={i}>{i}</div>)
-        }
-      </div>
       <Canvas camera={{ position: [5, 120, 10], rotation: [90,0,0] }}>
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
@@ -39,7 +34,6 @@ export default function Model(props) {
         <OrbitControls />
         <axesHelper args={[5]} /> {/*X axis is red, the Y axis is green and the Z axis is blue.*/}
       </Canvas>
-      <div></div>
     </div>
   )
 }

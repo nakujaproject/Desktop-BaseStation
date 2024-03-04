@@ -47,13 +47,13 @@ export default function Video() {
 
 	return (
 		<>
-			<div className="w-full h-[297px] md:h-[603px] lg:h-[500px] bg-black flex justify-center items-center">
+			<div className="w-full h-full bg-black flex justify-center items-center">
 				{
 					!stream && 
 					<div ref={image}>
 						<img
 							alt="logo"
-							src="/nakuja_logo.png"
+							src="./nakuja_logo.png?asset"
 							width="90"
 							height="80"
 						/>

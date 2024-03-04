@@ -4,7 +4,6 @@ import LineChart from './components/lineChart';
 import Video from './components/Video';
 import Model from './components/model';
 import Countdown from './components/countdown';
-import Telemetry from './components/telemetry';
 import Map from './components/Map';
 import { Context } from './ContextProvider';
 import setting from './assets/setting.svg';
@@ -90,36 +89,32 @@ function App() {
 	
 	// called when a message arrives
 	let onMessageArrived = (message) => {
-		//0: "Timestamp"1: "Altitude"2: "ax"3: "ay"4: "az"5: "gx"6: "gy"7: "gz"8: "filtered_s"9: "filtered_v"10: "filtered_a"
 		console.log("onMessageArrived:");
-		// let newData = JSON.parse(message.payloadString);
-		let newData = message.payloadString.split(',');
+		let newData = JSON.parse(message.payloadString);
 		let time = Date.now();
-		console.log(newData.length);
-		if(newData.length===14){
-			if(parseInt(newData[7])>previousAltitude) setApogee(newData[7]);
-			previousAltitude = parseInt(newData[7]);
-			console.log(`Previous ALT == ${typeof(previousAltitude)}`)
-			setAGL(newData[7]);
-			setGx(newData[4]);
-			setGy(newData[5]);
-			setGz(newData[6]);
-			setLatitude(newData[11]);
-			setLongitude(newData[12]);
-			setState(newData[13]);
-			altitudeChartRef.current.data.datasets[0].data.push({x: time, y:newData[7]});
-			altitudeChartRef.current.data.datasets[1].data.push({x: time, y:newData[8]});
-			altitudeChartRef.current.update('quiet');
-			//
-			velocityChartRef.current.data.datasets[0].data.push({x: time, y:newData[9]});
-			velocityChartRef.current.update('quiet');
-			//
-			accelerationChartRef.current.data.datasets[0].data.push({x: time, y:newData[1]});//ax
-			accelerationChartRef.current.data.datasets[1].data.push({x: time, y:newData[2]});
-			accelerationChartRef.current.data.datasets[2].data.push({x: time, y:newData[3]});
-			accelerationChartRef.current.data.datasets[3].data.push({x: time, y:newData[10]});
-			accelerationChartRef.current.update('quiet');
-		}
+		if(parseInt(newData.altitude)>previousAltitude) setApogee(newData.altitude);
+		previousAltitude = newData.filtered_s;
+		setAltitude(newData.altitude);
+		setAGL(newData.filtered_s);
+		setGx(newData.gx);
+		setGy(newData.gy);
+		setGz(newData.gz);
+		setLatitude(newData.latitude);
+		setLongitude(newData.longitude);
+		setState(newData.state);
+		//charts update
+		altitudeChartRef.current.data.datasets[0].data.push({ x: time, y: newData.altitude });
+		altitudeChartRef.current.data.datasets[1].data.push({ x: time, y: newData.filtered_s });
+		altitudeChartRef.current.update('quiet');
+		//
+		velocityChartRef.current.data.datasets[0].data.push({ x: time, y: newData.filtered_v });
+		velocityChartRef.current.update('quiet');
+		//
+		accelerationChartRef.current.data.datasets[0].data.push({ x: time, y: newData.ax }); // ax
+		accelerationChartRef.current.data.datasets[1].data.push({ x: time, y: newData.ay });
+		accelerationChartRef.current.data.datasets[2].data.push({ x: time, y: newData.az });
+		accelerationChartRef.current.data.datasets[3].data.push({ x: time, y: newData.filtered_a });
+		accelerationChartRef.current.update('quiet');
 	}
 
   return (
@@ -140,25 +135,18 @@ function App() {
 						<button className='block hover:scale-125 px-6 py-2' onClick={e=>{document.getElementById('settings').style.visibility='visible'}}><img src={setting} className='w-7'/></button>
 					</div>
 				</div>
-				<div className="grid grid-cols-1 lg:grid-cols-3">
+				<div className="grid grid-cols-1 lg:grid-cols-3 space-x-2 mt-4 lg:min-h-96 2xl:min-h-[55vh]">
 					<div>
-						<div className='choice'>
-							<button id={stream?'active':''} onClick={(e)=>{setStream(true)}}>Live Stream</button>
-							<button id={stream?'':'active'} onClick={(e)=>{setStream(false)}}>Map</button>
-						</div>
-						{
-						stream?
-						<Video/>
-						:
-						<Map position={[latitude,longitude]}/>
-						}
-					</div>
-					{/* <Telemetry /> */}
-					<div className="lg:order-first w-full lg:w-12/12 lg:col-span-2">
 						<Model x={gx} y={gy} z={gz} />
 					</div>
+					<div>
+						<Video/>
+					</div>
+					<div>
+						<Map position={[latitude,longitude]}/>
+					</div>
 				</div>
-				<div className="grid grid-cols-1 lg:grid-cols-3">
+				<div className="grid grid-cols-1 lg:grid-cols-3 2xl:mt-6">
 					<div className="w-full lg:w-11/12">
 						<LineChart ref={altitudeChartRef} type="altitude" />
 					</div>

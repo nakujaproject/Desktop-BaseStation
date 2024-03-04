@@ -25,8 +25,8 @@ x64:
     - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
 nsis:
   script: |-
-    !include "C:\Users\Sam\Desktop\nakuja\N3.5\basestation\node_modules\app-builder-lib\templates\nsis\include\StdUtils.nsh"
-    !addincludedir "C:\Users\Sam\Desktop\nakuja\N3.5\basestation\node_modules\app-builder-lib\templates\nsis\include"
+    !include "C:\Users\Sam\Desktop\nakuja\N3.5\Desktop-BaseStation\node_modules\app-builder-lib\templates\nsis\include\StdUtils.nsh"
+    !addincludedir "C:\Users\Sam\Desktop\nakuja\N3.5\Desktop-BaseStation\node_modules\app-builder-lib\templates\nsis\include"
     !macro _isUpdated _a _b _t _f
       ${StdUtils.TestParameter} $R9 "updated"
       StrCmp "$R9" "true" `${_t}` `${_f}`
@@ -98,7 +98,7 @@ nsis:
       !insertmacro MUI_LANGUAGE "Vietnamese"
     !macroend
 
-    !include "C:\Users\Sam\AppData\Local\Temp\t-BHkKuW\0-messages.nsh"
+    !include "C:\Users\Sam\AppData\Local\Temp\t-mjJbZL\0-messages.nsh"
     !addplugindir /x86-unicode "C:\Users\Sam\AppData\Local\electron-builder\Cache\nsis\nsis-resources-3.4.1\plugins\x86-unicode"
 
     Var newStartMenuLink
